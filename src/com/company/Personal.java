@@ -1,24 +1,29 @@
 package com.company;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 
-public abstract class Personal implements HavingProfessionalSkills{
-    protected String name;
-    protected int age;
-    protected int experience;
-    protected OperatingSchedule operatingSchedule;
+public abstract class Personal{
+    private String name;
+    private int age;
+    private int experience;
+    private OperatingSchedule operatingSchedule;
+    private Patients patients;
 
-    public Personal(String name, int age, int experience, OperatingSchedule operatingSchedule) {
+    public Personal(String name, int age, int experience, OperatingSchedule operatingSchedule, Patients patients) {
         this.name = name;
         this.age = age;
         this.experience = experience;
         this.operatingSchedule = operatingSchedule;
+        this.patients = patients;
     }
 
-    public Personal(String name, int age, int experience) {
+    public Personal(String name, int age, int experience, Patients patients, OperatingSchedule operatingSchedule) {
         this.name = name;
         this.age = age;
         this.experience = experience;
+        this.patients = patients;
+        this.operatingSchedule = operatingSchedule;
     }
 
 
@@ -34,14 +39,16 @@ public abstract class Personal implements HavingProfessionalSkills{
     public OperatingSchedule getOperatingSchedule(OperatingSchedule operatingSchedule){
         return this.operatingSchedule;
     }
+    public Patients getPatients(){
+        return patients;
+    }
 
-
-//    public String getInfo(){
-//        return "Имя медика " + name
-//                + "\nВозраст " + age
-//                + "\nОпыт " + experience
-//                + "\nГрафик работы " + operatingSchedule;
-//    }
-
-
+    public String getInfo(){
+        return "Имя медика: " + getName(name)
+                + "\nВозраст: " + getAge(age)
+                + "\nОпыт: " + getExperience(experience)
+                + "\nГрафик работы: " + getOperatingSchedule(operatingSchedule)
+                + "\nПациенты: выздоровило - " + patients.getSuccessfulHealing() + " в тяжелом состоянии - " + patients.getSeriouslyIll() + " умерло - " + patients.getDead()
+                + "\n----------";
+    }
 }
